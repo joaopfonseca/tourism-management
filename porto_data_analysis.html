@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <title>DSSIM - Porto Data Analysis</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="./css/flexslider.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/line-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/elegant-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/lightbox.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--[if gte IE 9]>
+    <link rel="stylesheet" type="text/css" href="../../../Desktop/website/css/ie9.css"/>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700%7CRaleway:700' rel='stylesheet'>
+     <script src="./js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body class="plot-page">
+  	<div class="loader">
+  		<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+      </div>
+  	</div>
+
+	  <div class="nav-container">
+
+  		<nav class="top-bar">
+  			<div class="container">
+
+  				<div class="row utility-menu">
+  					<div class="col-sm-12">
+  						<div class="utility-inner clearfix">
+  						</div>
+  					</div>
+  				</div><!--end of row-->
+
+
+            <div class="row nav-menu">
+              <div class="col-sm-9 col-md-10 columns">
+    						<ul class="menu">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="airbnb_data_analysis.html">Airbnb Portugal</a></li>
+                  <li><a href="lisbon_data_analysis.html">Airbnb Lisbon</a></li>
+                  <li class="selected"><a href="porto_data_analysis.html">Airbnb Porto</a></li>
+                  <li><a href="cascais_airbnb_analysis.html">Airbnb Cascais</a></li>
+                  <li><a href="telecom_data_analysis.html">Telecom</a></li>
+                  <li><a href="flows/index.html" target="_blank">Flows</a></li>
+                  <!--<li><a href="telecom_data_analysis.html">Telecom</a></li>
+                  <li><a href="flows/index.html" target="_blank">Flows</a></li>-->
+                </ul>
+    					</div>
+            </div><!--end of row-->
+
+  				<div class="mobile-toggle">
+  					<i class="icon icon_menu"></i>
+  				</div>
+
+  			</div><!--end of container-->
+  		</nav>
+    </div>
+
+    <div>
+      <div class="main-container">
+  			<section class="no-pad">
+          <div class="main-content">
+            <div id="introduction">
+              <h1>Airbnb in Porto district</h1>
+              <p>
+                In this analysis the following questions will be addressed:
+                <ol>
+                  <li><b>Who is booking Airbnb rooms in Porto? (Profiling)</b></li>
+                  <li><b>Where do they choose to stay? (Geographic analysis)</b></li>
+                  <li><b>When do they do it? (Time Series analysis)</b></li>
+                </ol>
+              </p>
+              <p>
+                All the data was provided by Nova School of Business and Economics' research centre: <b>Data Science for Social Impact and Management</b>.
+              </p>
+              <p>
+                This analysis is focused on Smart Tourism Management in Portugal and was developed for Turismo de Portugal, a public national institution responsible for the promotion, enrichment and sustainability of Tourism in the country.
+              </p>
+            </div>
+
+            <div id="total-museum" class="plot-section">
+              <p><h3><b>Analysis of All Datasets</b></h3></p>
+              <h3>Property Listings<h3>
+              <p class="plot-description">
+We’ll start off by analysing the location of the properties listed in Airbnb. Listings are mainly concentrated in the central region of Porto municipality. Additionally, it is important to note the low concentration of listings around the region of Gaia, although it is close to the historic centre.
+              </p>
+              <embed src="porto/visualizations/geographic_analysis_plot.html"  width="100%" height="800"></embed>
+              <p>
+Most of these listings are referring to entire home/apartments, as the number of private rooms represent less than half the number of the former type.
+              </p>
+              <img src="porto/static_viz/listing_types.png" alt="Mountain View">
+            </div>
+
+            <div id="entries-per-museum" class="plot-section">
+              <h3>Listing Reviews<h3>
+              <p class="plot-description">
+To extract information from this dataset some basic Text Mining techniques were required. This is because none of the data regarding user information is standardized. Although we have some details regarding the user's profile, namely its first name, country of origin, state (if applicable), city of origin, a brief user description, last attended teaching institution and occupation, none of it can be directly used for analysis without prior pre-processing (for the goal of this analysis, the priority was given to the parsing of the country of origin out of the non-standardized text fields: Country and City). This was done by developing a script to detect names of cities and countries out of these two variables. Then, the cities were associated to the corresponding country, followed by a final correction of wrongly assigned countries. Finally, the results from the two parsing processes were merged into a final solution. Out of approximately 245 thousand reviews’ country of origin, 6 thousand were left unparsed (i.e., unsuccessful parse). Finally, this is the top 50 countries of origin for tourists in Porto:
+              </p>
+              <img src="porto/static_viz/final_country_parse.png" alt="Mountain View">
+              <p>
+It becomes clear that the number of French Airbnb users in Lisbon is extremely high, which might be caused by two factors: 1) the seasonal immigrant flows from France into Portugal throughout the summer; 2) Airbnb’s popularity in France, which according to Google trends it is in fact, the country in which Airbnb is most popular:
+              </p>
+              <!-- Google Trends visualization -->
+              <div>
+                <iframe id="trends-widget-1" src="https://trends.google.com:443/trends/embed/explore/GEO_MAP?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22airbnb%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%222017-03-20%202018-03-20%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&amp;tz=0&amp;eq=q%3Dairbnb%26date%3Dtoday%2012-m" width="100%" frameborder="0" scrolling="0" style="border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.24) 0px 2px 2px 0px; height: 416px;"></iframe>
+              </div>
+              <p>
+Additionally, the distribution of tourists’ countries of origin in Porto is considerably different than the one from Lisbon and Portugal.
+              </p>
+
+            </div>
+
+
+            <div id="number-museums-visited" class="plot-section">
+              <h3>Modelling</h3>
+              <p class="plot-description">
+To analyse patterns in the data, we will start by segmenting Property Listings by geographic location and value. Afterwards, we will associate the generated clusters to the customer data and bookings data.
+              </p>
+              <p>
+From the correlation matrix in the Listings table we can extract some insights regarding how variables can (with causality or not) affect Airbnb listing value:
+              </p>
+              <embed src="porto/visualizations/correlation_matrix_test.html"  width="100%" height="800"></embed>
+
+            </div>
+
+            <div id="card-activation" class="plot-section">
+              <h3>Clustering</h3>
+              <h4><b>Geographic Clustering</b></h4>
+              <p class="plot-description">
+We started by clustering listings geographically using the borders of each Municipality in Lisbon. To do this, we only used the variables Latitude and Longitude. We started by using a shapefile (source: <a href="http://gadm.org/" style="color: #E54D42" target="_blank">GADM</a>) to determine to which district each listing belonged to. Afterwards, facing the existence of listings with inaccurate location which because of this reason were not included in any municipality (e.g., listings located in a river or the sea), we used the K-nearest neighbours algorithm (with K=3) to classify these listings.
+              </p>
+              <p>
+We will analyse the characteristics of the defined regions:
+              </p>
+                <embed src="porto/visualizations/geographic_clustering.html"  width="100%" height="800"></embed>
+
+              <h4><b>Value Clustering</b></h4>
+              <p class="plot-description">
+We will use all variables that relate to the listing’s value as a tourism hosting, which in this case would be the Annual Revenue, Average Daily Rate, Occupancy Rate and Number of Bookings. The reason we did not pick the Number of Reviews for a listing is because it is highly correlated with the number of bookings. Hence, in order to avoid a bias in the clustering process, this variable was discarded. Additionally, we also filtered out listings whose annual revenues were clear outliers (>$10 million) and also listings whose number of reservations in the last twelve months was lower than 5 (as these will correspond either to overly recent listings, or inactive listings).
+              </p>
+              <p>
+The elbow method will be applied to determine the number of K:
+              </p>
+              <img src="porto/static_viz/inertia_value.png" alt="Mountain View">
+              <p>
+Along the increase of K, the decrease rate of inertia becomes lower when K=5. Considering the classification intuition behind value clustering (distinguish between high, medium-high, medium, medium-low and low value listings) 5 clusters will represent our preferred number of clusters.
+              </p>
+              <p>
+                <b>
+When analysing results of the value clustering, we can see that the 5 clusters have very heterogeneous characteristics.
+                </b>
+              </p>
+              <embed src="porto/visualizations/value_clustering.html"  width="100%" height="800"></embed>
+
+              <embed src="porto/visualizations/value_clusters_profiling.html"  width="100%" height="400"></embed>
+
+
+            </div>
+
+            <div id="entries-week" class="plot-section">
+              <h3>Geographic Analysis</h3>
+              <p class="plot-description">
+The number of reservations throughout the time frame available are highly seasonal and has increased greatly over time. However, this increase can be attributed to both the rise in popularity of Airbnb as well as Portugal as a touristic destination, being impossible to distinguish how the two factors impact this behaviour. The data analysed refers solely to bookings in Airbnb’s platform. Porto yields a crushing majority of the total bookings in the region, whereas the second main destination corresponds to Vila Nova de Gaia.
+              </p>
+              <p class="plot-description">
+Finally, one can also conclude that the most outer regions of Porto yield the lowest number of bookings.
+              </p>
+              <embed src="porto/visualizations/reservation_growth_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+Regarding the generated revenue by each municipality, one can see that the proportion is relatively similar to the number of bookings across municipalities.
+
+              </p>
+              <embed src="porto/visualizations/revenue_growth_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+Using the average occupancy rate for each district, we can now analyse the balance between Demand and supply of Airbnb bookings, considering the number of days each listing has been booked. One can see that the occupancy rates are extremely seasonal, having Porto municipality the smallest seasonality in this variable. Furthermore, Vila Nova de Gaia is second municipality with the highest occupancy rates in the high season (one must take into account that regions like Alenquer are nearly irrelevant for this analysis, given the low number of listings located in this area).
+              </p>
+              <embed src="porto/visualizations/occupancy_rate_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+Below is represented the estimated length of stay per Airbnb tourist in each district. As previously mentioned, the of length of stay in regions with low Airbnb activity can vary inexplicably given such fact. Although, it is visible that the length of stay in Porto municipality is considerably lower when compared to the other regions.
+              </p>
+              <embed src="porto/visualizations/estimated_lengths_of_stay_regions.html"  width="100%" height="600"></embed>
+
+
+            </div>
+
+            <div id="entries-hour" class="plot-section">
+              <h3>Country of Origin Analysis</h3>
+              <p class="plot-description">
+The existent data regarding country of origin was extracted from the reviews table. This table contains public reviews made by users after their stay in the listed offer. One must bear in mind that Airbnb differentiates reviews by public and private feedback, both for hosts and guests. So, in this situation we are analysing a sample of user profiles that represent 10% of the total bookings that were actually completed. Although this sample is statistically significant (even though it was not randomly generated), it is important to be aware that the analysis of profiles by country of origin are being made from a sample, instead of the overall bookings.
+              </p>
+              <p>
+In the presented plot we can analyse the number of reviews for each month through the available years in the provided data.
+              </p>
+              <p>
+We can see that tourist behaviour regarding month of visit is relatively equal across different nationalities, being the peak of tourists in the summer period, comprehended between June and October. Although, three different tourist patterns arise.
+              </p>
+              <p>
+Tourists coming from mainly southern Europe countries such as Portugal, Spain, France and Italy are highly concentrated in the month of August, with a local maximum in the months between March and May.
+              </p>
+              <p>
+Tourists from Australia, Belgium, Canada, United Kingdom and United States register similar visiting periods. These visitors, unlike the ones previously mentioned, have their booking peaks in two different months, July and September.
+              </p>
+              <p>
+As a third pattern, we can see Germany and Poland with their local maxima in September, with relatively high booking counts in the remaining months of the high season.
+              </p>
+              <embed src="porto/visualizations/count_of_reviews_per_nationality.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+Below is presented the Average Daily Rate paid by the average tourist from each country of origin. We can see that eastern countries represent the ones with the least purchasing power, whereas central European tourists spend an average amount of money on Airbnb Bookings.
+              </p>
+              <embed src="porto/visualizations/ADR_origins.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+
+Below is depicted the estimated average length of stay for each origin. It is possible to assess that the time of stay does not vary significantly across country of origin:
+              </p>
+              <embed src="porto/visualizations/estimated_lengths_of_stay_origins.html"  width="100%" height="600"></embed>
+
+
+            </div>
+
+            <div id="entries-day" class="plot-section">
+              <h3>Value Analysis</h3>
+              <p class="plot-description">
+In the plot presented below is represented the RevPAR (Revenue Per Available Room) of each municipality. Although Porto municipality does not possess one of the highest values in the high season, it presents the least varying RevPAR throughout the period of analysis, while still being one of the municipalities with the highest values.
+              </p>
+              <embed src="porto/visualizations/Revpar_per_cluster_and_date.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+Finally, the growth of Bedroom supply in each municipality has grown, especially in Porto. One must mention that given the available data (until January 2018 in the case of listing data in Airbnb’s platform), the growth of bedroom supply from 2017 to 2018 is yet to be known.
+              </p>
+              <embed src="porto/visualizations/bedroom_count.html"  width="100%" height="600"></embed>
+            </div>
+          </div>
+
+        </section>
+      </div>
+      <div class="content-nav">
+        <ul class="nav nav-tabs nav-stacked primary">
+          <li class="tab"><a href="#introduction">Introduction</a></li>
+          <li class="tab"><a href="#total-museum">Analysis of All Datasets</a></li>
+          <li class="tab"><a href="#number-museums-visited">Modelling</a></li>
+          <li class="tab"><a href="#card-activation">Clustering</a></li>
+          <li class="tab"><a href="#entries-week">Geographic Analysis</a></li>
+          <li class="tab"><a href="#entries-hour">Country of Origin Analysis</a></li>
+          <li class="tab"><a href="#entries-day">Value Analysis</a></li>
+        </ul>
+      </div>
+    </div>
+
+		<div class="footer-container">
+      <footer class="bg-primary short-2">
+        <div class="container">
+          <div class="right-footer">
+            <h6>Data Science for Social Impact and Management</h6>
+            <div class="footer-nav">
+              <a href="DSSG_Florence_report.pdf">Report</a>
+              <a href="http://dssim.dssg-eu.org/">DSSIM</a>
+              <a href="https://github.com/DSSG2017/">Github</a>
+            </div>
+            <div class="disclaimer">All analyses and opinions contained here are the author’s own, and are not necessarily held or endorsed by any of the partners or data-providing agencies.</div>
+          </div>
+          <div class="left-footer">
+            <h5>Acknowledgements</h5>
+            <div class="small-text-block">
+                Nova School of Business and Economics
+               |
+                Nova Information Management School
+               |
+                Turismo de Portugal
+               |
+                NOS SGPS
+
+              </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="firenzePlots.js"></script>
+    <script>
+      totalMuseum();
+      entriesPerMuseum();
+      numberMuseumsVisited();
+      cardActivation();
+      entriesWeek();
+      entriesHour();
+      entriesDay();
+    </script>
+		<script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.plugin.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.flexslider-min.js"></script>
+    <script src="./js/smooth-scroll.min.js"></script>
+    <script src="./js/skrollr.min.js"></script>
+    <script src="./js/spectragram.min.js"></script>
+    <script src="./js/scrollReveal.min.js"></script>
+    <script src="./js/isotope.min.js"></script>
+    <script src="./js/twitterFetcher_v10_min.js"></script>
+    <script src="./js/lightbox.min.js"></script>
+    <script src="./js/jquery.countdown.min.js"></script>
+    <script src="./js/scripts.js"></script>
+    <script>
+      $('a.yourlink').click(function(e) {
+        e.preventDefault();
+        window.open('http://yoururl1.com');
+        window.open('http://yoururl2.com');
+      });
+    </script>
+    <script>
+      // Cache selectors
+      var lastId,
+      topMenu = $(".content-nav"),
+      topMenuHeight = 0,
+      // All list items
+      menuItems = topMenu.find("a"),
+      // Anchors corresponding to menu items
+      scrollItems = menuItems.map(function(){
+        var item = $($(this).attr("href"));
+        if (item.length) { return item; }
+      });
+
+      // Bind click handler to menu items
+      // so we can get a fancy scroll animation
+      menuItems.click(function(e){
+        var href = $(this).attr("href"),
+            offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+        $('html, body').stop().animate({
+            scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+      });
+
+      // Bind to scroll
+      $(window).scroll(function(){
+        // Get container scroll position
+        var fromTop = $(this).scrollTop()+topMenuHeight;
+
+         // Get id of current scroll item
+         var cur = scrollItems.map(function(){
+           if ($(this).offset().top < fromTop)
+             return this;
+         });
+         // Get the id of the current element
+         cur = cur[cur.length-1];
+         var id = cur && cur.length ? cur[0].id : "";
+
+        if (lastId !== id) {
+             lastId = id;
+             // Set/remove active class
+             menuItems
+               .parent().removeClass("active")
+               .end().filter("[href='#"+id+"']").parent().addClass("active");
+        }
+
+        var sidebar = $('.plot-page .content-nav');
+        if (sidebar.offset().top + sidebar.height() >= $('.footer-container').offset().top - 20) {
+          sidebar.css('position', 'absolute');
+        } else if($(document).scrollTop() + window.innerHeight < $('.footer-container').offset().top) {
+          sidebar.css('position', 'fixed'); // restore when you scroll up
+        }
+      });
+    </script>
+  </body>
+</html>

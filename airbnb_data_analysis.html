@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <title>DSSIM - Airbnb Data Analysis</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="./css/flexslider.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/line-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/elegant-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/lightbox.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--[if gte IE 9]>
+    <link rel="stylesheet" type="text/css" href="../../../Desktop/website/css/ie9.css"/>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700%7CRaleway:700' rel='stylesheet' type='text/css'>
+     <script src="./js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body class="plot-page">
+  	<div class="loader">
+  		<div class="spinner">
+			  <div class="double-bounce1"></div>
+			  <div class="double-bounce2"></div>
+      </div>
+  	</div>
+
+	  <div class="nav-container">
+
+  		<nav class="top-bar">
+  			<div class="container">
+
+  				<div class="row utility-menu">
+  					<div class="col-sm-12">
+  						<div class="utility-inner clearfix">
+  						</div>
+  					</div>
+  				</div><!--end of row-->
+
+          <div class="row nav-menu">
+            <div class="col-sm-9 col-md-10 columns">
+  						<ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="selected"><a href="airbnb_data_analysis.html">Airbnb Portugal</a></li>
+                <li><a href="lisbon_data_analysis.html">Airbnb Lisbon</a></li>
+                <li><a href="porto_data_analysis.html">Airbnb Porto</a></li>
+                <li><a href="cascais_airbnb_analysis.html">Airbnb Cascais</a></li>
+                <li><a href="telecom_data_analysis.html">Telecom</a></li>
+                <li><a href="flows/index.html" target="_blank">Flows</a></li>
+                <!--<li><a href="telecom_data_analysis.html">Telecom</a></li>
+                <li><a href="flows/index.html" target="_blank">Flows</a></li>-->
+              </ul>
+  					</div>
+          </div><!--end of row-->
+  				<div class="mobile-toggle">
+  					<i class="icon icon_menu"></i>
+  				</div>
+
+  			</div><!--end of container-->
+  		</nav>
+    </div>
+
+    <div>
+      <div class="main-container">
+  			<section class="no-pad">
+          <div class="main-content">
+            <div id="introduction">
+              <h1>Airbnb Portugal</h1>
+              <p>
+                Airbnb is an online (consumer to consumer) marketplace and hospitality service, where customers publicise, explore and book accommodation for short term periods such as holiday cottages, apartments, homestays, hostel beds and hotel rooms, where typically listings represent property owned by individuals. In a broad sense, Airbnb intends to facilitate experiences related to tourism, allowing to enrol in tourism related activities such as walking tours and make reservations at restaurants. As a broker, Airbnb doesn’t own any real estate, making it a very well-known example of a sharing economy.
+              </p>
+              <p>
+                Four datasets were used for this analysis, containing information about all properties listed in the platform and located in Portugal, booking activities (which includes Accepted Bookings, Blocked Bookings and Cancelled/Unanswered bookings), monthly details for each property’s bookings (revenue, occupancy rate and number of bookings) and Public Reviews’ information associated to basic user information (review text, non standardized customer’s country of origin and job). However, it is not possible to link a public review with the corresponding booking.
+              </p>
+              <p>
+                As the platform continues to grow exponentially in users and number of listings, it represents a major pillar of the tourism industry. Airbnb, allied with the continuously decreasing costs of mobility and Information and Communication Technologies, have allowed individuals with a lower income to contribute to this industry as a low cost segment. A study conducted by Bankwest Curtin Economics Centre: “The Impact of Airbnb on Western Australia’s Tourism” (October 2017, page 67-68) suggests that tourists (Holidaymakers) using Airbnb spend on average less in most categories when compared to non-Airbnb users, especially food & accommodation (≈ -880 AUD) and transportation (≈ -270 AUD).
+              </p>
+              <p>
+                Although Airbnb data can provide valuable information, a few limitations to this study must be pointed out beforehand. It is impossible to assess whether the reviews data is accurate, given that Airbnb's accuracy in their own data is not certain. Furthermore, Airbnb's reviews can be either public or private. As we are only using publicly available data, we do not have access to user data that left a private review, or no review at all. So, we are analysing user profiles that represent about 10% of the total bookings (≈ 1.2 million public reviews) that were actually completed. Although the user data sample extracted from the overall reviews was not randomly generated, it is highly representative. The number of total completed bookings made between September 1st 2014 and December 31st 2017 is 11.550 million Bookings which implies a minimum sample size of 16564 for a 99% confidence level and 1% margin of error. As our dataset has a depth of 1.2 million observations, it is statistically significant (although, we cannot conclude that it is an unbiased sample, as it was not randomly selected).
+              </p>
+              <p>
+                A second limitation would be the accuracy of data scraped by the data provider, AirDNA. In these datasets, some of the data is not very consistent. For instance, in these datasets the variables regarding monetary value (Daily rates, listing monthly incomes, etc.) are not always directly convertible between USD currency and native currency (euros), where it was found that in these situations variables with USD currency turned out to be more trustworthy than native currency. Same inconsistency applies to variables such as Booked Date, where in situations that the booking was completed this field was still left blank. Aside from these type of situations, some clear outliers were found, as is the case of some bookings that exceeded the price of $100 000 (with a maximum value of $540 954).
+              </p>
+              <p>
+                Finally, in this analysis the following questions will be addressed:
+                <ol>
+                  <li><b>Who is booking Airbnb rooms in Portugal? (Profiling)</b></li>
+                  <li><b>Where do they choose to stay? (Geographic analysis)</b></li>
+                  <li><b>When do they do it? (Time Series analysis)</b></li>
+                </ol>
+              </p>
+              <p>
+                All the data was provided by Nova School of Business and Economics' research centre: <b>Data Science for Social Impact and Management</b>.
+              </p>
+              <p>
+                This analysis is focused on Smart Tourism Management in Portugal and was developed for Turismo de Portugal, a public national institution responsible for the promotion, enrichment and sustainability of Tourism in the country.
+              </p>
+            </div>
+
+            <div id="total-museum" class="plot-section">
+              <p><h3><b>Analysis of All Datasets</b></h3></p>
+              <h3>Property Listings<h3>
+              <p class="plot-description">
+                We’ll start off by analysing the location of the properties listed in Airbnb. <b>Listings are mainly concentrated in the coastal region of Portugal</b>, especially Lisbon, Porto and Algarve regions.
+              </p>
+              <embed src="visualizations/geographic_analysis_plot.html"  width="100%" height="800"></embed>
+              <p>
+                Listings’ Distribution across cities is highly heterogeneous. The city with most property listings is Lisbon, with over 25 thousand listings. Porto comes second with about 10 thousand listings, where the remaining cities have less than half the number of listings existent in Porto. Although, it is important to mention that at this point there are many listings without a city associated to it (missing values). This challenge will be fixed in the geographic clustering process.
+
+              </p>
+              <img src="static_viz/listing_cities.png" alt="Mountain View">
+              <p>
+                Most of these listings are referring to entire home/apartments, as the number of private rooms represent less than half the number of the former type.
+              </p>
+              <img src="static_viz/listing_types.png" alt="Mountain View">
+
+            </div>
+
+            <div id="entries-per-museum" class="plot-section">
+              <h3>Daily Bookings<h3>
+              <p class="plot-description">
+                The daily bookings table contains information of daily booking activities. Although, aside from completed bookings, this table also includes data from blocked bookings, as well as requested bookings, which include the unanswered requests (or still awaiting an answer). So, in the graph below is depicted the daily count of overall activity in this operation.
+              </p>
+              <p>
+                Booking activity done in Airbnb has grown exponentially over time. This might be because of two main factors: The growing popularity of Airbnb’s platform, and the growing popularity of Portugal as touristic destination. So, it is possible to conclude that there is a growing number of tourists in Portugal using Airbnb hosting.
+              </p>
+              <p>
+                Booking activity can mean either a booking request (which means such request is waiting for approval or has been blocked), a cancelled booking, or a booking that was actually completed and went through (which amounts to approximately 21% of the overall booking events). In the plot below is presented booking activity over time between September 2014 and December 2017.
+              </p>
+              <img src="static_viz/daily_date.png" alt="Mountain View">
+            </div>
+
+            <div id="entries-per-museum" class="plot-section">
+              <h3>Monthly bookings<h3>
+              <p class="plot-description">
+                We can conclude that although hosting supply is increasing exponentially, there are suggestions of market distortions, as there are many listings do not receive any reservation in several months:
+              </p>
+              <img src="static_viz/count_of_months_with_no_reservations.png" alt="Mountain View">
+              <p>
+                The causes for this factor must be looked into more thoroughly, as it is important to assess whether there are specificities in these listings that cause a low demand for these offers, or there is too much supply in certain regions. This will be studied in the Value analysis presented below.
+              </p>
+            </div>
+
+            <div id="entries-per-museum" class="plot-section">
+              <h3>Listing Reviews<h3>
+              <p class="plot-description">
+                To extract information from this dataset some basic Text Mining techniques were required. This is because none of the data regarding user information is standardized. Although we have some details regarding the user's profile, namely its first name, country of origin, state (if applicable), city of origin, a brief user description, last attended teaching institution and occupation, none of it can be directly used for analysis without prior pre-processing (for the goal of this analysis, the priority was given to the parsing of the country of origin out of the non-standardized text fields: Country and City). This was done by developing a script to detect names of cities and countries out of these two variables. Then, the cities were associated to the corresponding country. Finally, the results from the two parsing processes were merged into a final solution. Out of approximately 1.2 million reviews’ country of origin, 118 thousand were left unparsed (i.e., unsuccessful parse). Finally, this is the top 50 countries of origin for tourists in Portugal:
+              </p>
+              <img src="static_viz/final_country_parse.png" alt="Mountain View">
+              <p>
+                It becomes clear that the number of French Airbnb users in Portugal is extremely high, which might be caused by two factors: 1) the seasonal immigrant flows from France into Portugal throughout the summer; 2) Airbnb’s popularity in France, which according to Google trends it is in fact, the country in which Airbnb is most popular:
+              </p>
+              <!-- Google Trends visualization -->
+              <div>
+                <iframe id="trends-widget-1" src="https://trends.google.com:443/trends/embed/explore/GEO_MAP?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22airbnb%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%222017-03-20%202018-03-20%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&amp;tz=0&amp;eq=q%3Dairbnb%26date%3Dtoday%2012-m" width="100%" frameborder="0" scrolling="0" style="border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.24) 0px 2px 2px 0px; height: 416px;"></iframe>
+              </div>
+            </div>
+
+
+            <div id="number-museums-visited" class="plot-section">
+              <h3>Modelling</h3>
+              <p class="plot-description">
+                To analyse patterns in the data, we will start by segmenting Property Listings by geographic location and value. Afterwards, we will associate the generated clusters to the customer data and bookings data.
+              </p>
+              <p>
+                From the correlation matrix in the Listings table we can extract some insights regarding what can affect Airbnb listing value and assess which variables we should use for the value clustering:
+              </p>
+              <embed src="visualizations/correlation_matrix_test.html"  width="100%" height="800"></embed>
+              <p>
+                <b>At this point we can assess some interesting correlations across variables, as is the case with the relationship between the number of Bookings with number of Reviews (-0.77 correlation), and the number of Reviews and Average Daily Rate (-0.24 correlation).</b>
+              </p>
+
+            </div>
+
+            <div id="card-activation" class="plot-section">
+              <h3>Clustering</h3>
+              <h4><b>Geographic Clustering</b></h4>
+              <p class="plot-description">
+                We started by clustering listings geographically using the borders of each district in Portugal. To do this, we only used the variables Latitude and Longitude. We started by using a shapefile (source: <a href="http://gadm.org/" style="color: #E54D42" target="_blank">GADM</a>) to determine to which district each listing belonged to. Afterwards, facing the existence of listings with inaccurate location which because of this reason were not included in any district (e.g., listings located in a river or the sea), we used the K-nearest neighbours algorithm (with K=3) to classify these listings.
+              </p>
+              <p>
+                We will analyse the characteristics of these defined regions:
+              </p>
+                <embed src="visualizations/geographic_clustering.html"  width="100%" height="800"></embed>
+
+              <h4><b>Value Clustering</b></h4>
+              <p class="plot-description">
+                We will use all variables that relate to the listing’s value as a tourism hosting, which in this case would be the Annual Revenue, Average Daily Rate, Occupancy Rate and Number of Bookings. The reason we did not pick the Number of Reviews for a listing is because it is highly correlated with the number of bookings. Hence, in order to avoid a bias in the clustering process, this variable was discarded.
+              </p>
+              <p>
+                The elbow method will be applied to determine the number of K:
+              </p>
+              <img src="static_viz/inertia_value.png" alt="Mountain View">
+              <p>
+                Along the increase of K, the decrease rate of inertia becomes lower when K=5. Considering the classification intuition behind value clustering (distinguish between high, medium-high, medium, medium-low and low value listings) 5 clusters will represent our preferred number of clusters.
+              </p>
+              <embed src="visualizations/value_clustering.html"  width="100%" height="800"></embed>
+
+              <embed src="visualizations/value_clusters_profiling.html"  width="100%" height="400"></embed>
+
+            </div>
+
+            <div id="entries-week" class="plot-section">
+              <h3>Geographic Analysis</h3>
+              <p class="plot-description">
+                As expected, the number of reservations throughout the time frame available are highly seasonal and has increased greatly over time. However, this increase is believed to be attributed to the rise in popularity of Airbnb, instead of Portugal as a touristic destination. The data analysed refers solely to bookings in Airbnb’s platform. As concluded previously, Lisbon yields a very high percentage of total bookings, whereas the second main destination corresponds to Greater Porto region and the third most booked region is Faro. Although, due to Faro’s high touristic seasonality, in August 2017 Faro was the second most booked region in Portugal.
+              </p>
+              <p class="plot-description">
+                Finally, one can also conclude that the two regions with the overall lowest number of bookings are the districts in the interior of Portugal.
+              </p>
+              <embed src="visualizations/reservation_growth_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                Although Porto district is well ranked in the number of bookings, it falls behind significantly on the sum of generated revenue, when considering the exponential growth of generated revenue by Lisbon and Faro. We can see that although Faro had a lower number of reservations, it is the region with most revenue generated in the high season (June to September).
+              </p>
+              <p>
+                This suggests that although Porto is frequently chosen as a touristic destination, the value of listings is lower than expected. This can be caused by either (or both) excessive supply or low demand. Although, given the above analysis, one could discard the second hypothesis. Additionally, considering market distortions, it is also possible that bookings’ Daily Rates are not yet well adjusted to the market.
+              </p>
+              <embed src="visualizations/revenue_growth_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                When analysing the plot presented below, we can conclude that in fact Porto region yields one of the lowest revenue per reservation rates. On the same note, Lisbon has this same ratio as relatively average.
+              </p>
+              <p class="plot-description">
+                It comes to confirm Algarve region’s previously perceived Airbnb value that its value for the above mentioned ratio is the highest of all regions since March 2016. There are some reasons that can explain this fact. Namely, being Algarve highly sought after as a summer touristic destination by northern European countries and English speaking countries with medium to high purchasing power the price level in this region is usually higher, which will reflect on the accommodation’s daily rates. Additionally, the accommodations existing in this area are typically villas, which are significantly more expensive than entire apartments or rooms (given the size of accommodation). Lastly, the existence of more villas when opposed to buildings (when compared to regions like Greater Lisbon and Greater Porto) can also lead to less accommodation supply in a region with high demand, which will drive daily rates up.
+              </p>
+              <p class="plot-description">
+                Additionally, we can can see another region whose Revenue/Reservation ratio is very interesting: Setubal. As a region known for having good quality bathing regions and also being peripheral to Lisbon, it becomes an attractive region for tourism.
+              </p>
+              <embed src="visualizations/revenue_per_reservation_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                Using the average occupancy rate for each district, we can now analyse the balance between Demand and supply of Airbnb bookings, considering the number of days each listing has been booked. One can see that the demand in Faro district in August last year represents one of the regions with the highest occupancy rate, alongside with Azores, Porto, Setubal and Lisbon. When analysing the plot presented below alongside the ones presented above, this data suggests that overall demand is growing disproportionally given the supply in the market.
+              </p>
+              <p>
+                On a different analysis, we can see that Porto region did have a high amount of reservations throughout last year and is one of the regions with the highest occupancy rate throughout the year. When checking Porto region’s revenue per reservation, which is one of the lowest of all districts, as well as its number of reservations, which is only lower than Greater Lisbon’s, the study generates two possible outcomes: Either this region has a higher Supply/Demand ratio when compared to the remaining regions, or tourists tend to stay for shorter periods in this region, or both.
+              </p>
+              <embed src="visualizations/occupancy_rate_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                The following graphic depicts the representation of tourists from each country of origin in each cluster. As the French are the ones using Airbnb the most in Portugal, they end up ranking first in every cluster. When filtering out France and “others” nationality, some clear differences become clear from cluster to cluster. Portuguese tourists take a significant share in the regions of Tavira (eastern region of Algarve), the northern and southern interior regions of Portugal, and also the region of Braga. These clusters are also in fact the least popular ones for tourism, which can explain the increased representation of Portuguese tourists.
+              </p>
+              <embed src="visualizations/pies_nacionality_per_region.html"  width="100%" height="1050"></embed>
+              <p>
+                Below is represented the estimated length of stay per Airbnb tourist in each district:
+              </p>
+              <embed src="visualizations/estimated_lengths_of_stay_regions.html"  width="100%" height="600"></embed>
+
+
+            </div>
+
+            <div id="entries-hour" class="plot-section">
+              <h3>Country of Origin Analysis</h3>
+              <p class="plot-description">
+                The existent data regarding country of origin was extracted from the reviews table. This table contains public reviews made by users after their stay in the listed offer. One must bear in mind that Airbnb differentiates reviews by public and private feedback, both for hosts and guests. So, in this situation we are analysing a sample of user profiles that represent 10% of the total bookings that were actually completed. Although this sample is statistically significant (even though it was not randomly generated), it is important to be aware that the analysis of profiles by country of origin are being made from a sample, instead of the overall bookings.
+              </p>
+              <p>
+                In the presented plot we can analyse the number of reviews for each month through the available years in the provided data.
+              </p>
+              <p>
+                We can see that tourist behaviour regarding month of visit is relatively equal across different nationalities, being the peak of tourists in the summer period, comprehended between June and October. Although, three different tourist patterns arise.
+              </p>
+              <p>
+                Tourists coming from mainly southern Europe countries such as Portugal, Spain, France and Italy are highly concentrated in the month of August, with a local maximum in the months between March and May.
+              </p>
+              <p>
+                Tourists from Australia, Belgium, Canada, United Kingdom and United States register similar visiting periods. These visitors, unlike the ones previously mentioned, have their booking peaks in two different months, July and September.
+              </p>
+              <p>
+                As a third pattern, we can see Germany and Poland with their local maxima in September, with relatively high booking counts in the remaining months of the high season.
+              </p>
+              <embed src="visualizations/count_of_reviews_per_nationality.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                Below is presented the Average Daily Rate paid by the average tourist from each country of origin. We can see that eastern countries represent the ones with the least purchasing power, whereas central European tourists spend an average amount of money on Airbnb Bookings. Additionally, we can also see that western tourists from the countries Portugal, Spain and France are spending above the average.
+              </p>
+              <embed src="visualizations/ADR_origins.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                Below is depicted the average length of stay for each origin. It is possible to assess that the time of stay does not vary significantly across country of origin:
+              </p>
+              <embed src="visualizations/estimated_lengths_of_stay_origins.html"  width="100%" height="600"></embed>
+
+
+            </div>
+
+            <div id="entries-day" class="plot-section">
+              <h3>Value Analysis</h3>
+              <p class="plot-description">
+                Below is presented the weighted average daily rate for each region. The average daily rate was weighted using the number of reservations for each listing in each month. By doing this, we are attributing more weight to the houses with most listings, less weight to the ones with least listings and no weight to the ones without listings.
+              </p>
+              <p>
+                <b>(formula here)</b>
+              </p>
+              <embed src="visualizations/estimated_adr_per_region.html"  width="100%" height="600"></embed>
+              <p class="plot-description">
+                Finally, we calculated the ratio between Demand represented as the number of reservation, and supply, represented as the number of listings at each given period of time for each region. Additionally, in order to avoid a bias in the supply side, we filtered out listings with less than 5 listings in total, as these can either represent inactive listings or overly recent listings. We can see that Porto has a very high number of reservations per listing, which indicates that it is very sought after, suggesting the the Average Daily Rates in the region might be too low for the existing demand, when compared to the remaining regions.
+              </p>
+              <p>
+                Simultaneously, we can see that although Évora and Coimbra have low sums of revenue and reservations and a relatively average occupancy rate, they receive an unbalanced number of bookings for the existing number of bookings in the high season. This implies that Airbnb tourists will spend short periods of time in these areas, which is supported by the plot Average Length of Stay in the geographic analysis section.
+              </p>
+              <p>
+                In opposition, we can see that Madeira island’s Demand/Supply ratio is below average in the high season, having an average daily rate on par with the remaining regions, as well as occupancy rate. Although, Madeira is the region with the highest average length of stay, which explains the low number of bookings. We can also see that this region is one of the regions that least suffers from seasonality.
+              </p>
+              <embed src="visualizations/demand_supply_plot.html"  width="100%" height="600"></embed>
+            </div>
+          </div>
+
+        </section>
+      </div>
+      <div class="content-nav">
+        <ul class="nav nav-tabs nav-stacked primary">
+          <li class="tab"><a href="#introduction">Introduction</a></li>
+          <li class="tab"><a href="#total-museum">Analysis of All Datasets</a></li>
+          <li class="tab"><a href="#number-museums-visited">Modelling</a></li>
+          <li class="tab"><a href="#card-activation">Clustering</a></li>
+          <li class="tab"><a href="#entries-week">Geographic Analysis</a></li>
+          <li class="tab"><a href="#entries-hour">Country of Origin Analysis</a></li>
+          <li class="tab"><a href="#entries-day">Value Analysis</a></li>
+        </ul>
+      </div>
+    </div>
+
+		<div class="footer-container">
+      <footer class="bg-primary short-2">
+        <div class="container">
+          <div class="right-footer">
+            <h6>Data Science for Social Impact and Management</h6>
+            <div class="footer-nav">
+              <a href="DSSG_Florence_report.pdf">Report</a>
+              <a href="http://dssim.dssg-eu.org/">DSSIM</a>
+              <a href="https://github.com/DSSG2017/">Github</a>
+            </div>
+            <div class="disclaimer">All analyses and opinions contained here are the author’s own, and are not necessarily held or endorsed by any of the partners or data-providing agencies.</div>
+          </div>
+          <div class="left-footer">
+            <h5>Acknowledgements</h5>
+            <div class="small-text-block">
+                Nova School of Business and Economics
+               |
+                Nova Information Management School
+               |
+                Turismo de Portugal
+               |
+                NOS SGPS
+
+              </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="firenzePlots.js"></script>
+    <script>
+      totalMuseum();
+      entriesPerMuseum();
+      numberMuseumsVisited();
+      cardActivation();
+      entriesWeek();
+      entriesHour();
+      entriesDay();
+    </script>
+		<script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.plugin.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.flexslider-min.js"></script>
+    <script src="./js/smooth-scroll.min.js"></script>
+    <script src="./js/skrollr.min.js"></script>
+    <script src="./js/spectragram.min.js"></script>
+    <script src="./js/scrollReveal.min.js"></script>
+    <script src="./js/isotope.min.js"></script>
+    <script src="./js/twitterFetcher_v10_min.js"></script>
+    <script src="./js/lightbox.min.js"></script>
+    <script src="./js/jquery.countdown.min.js"></script>
+    <script src="./js/scripts.js"></script>
+    <script>
+      $('a.yourlink').click(function(e) {
+        e.preventDefault();
+        window.open('http://yoururl1.com');
+        window.open('http://yoururl2.com');
+      });
+    </script>
+    <script>
+      // Cache selectors
+      var lastId,
+      topMenu = $(".content-nav"),
+      topMenuHeight = 0,
+      // All list items
+      menuItems = topMenu.find("a"),
+      // Anchors corresponding to menu items
+      scrollItems = menuItems.map(function(){
+        var item = $($(this).attr("href"));
+        if (item.length) { return item; }
+      });
+
+      // Bind click handler to menu items
+      // so we can get a fancy scroll animation
+      menuItems.click(function(e){
+        var href = $(this).attr("href"),
+            offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+        $('html, body').stop().animate({
+            scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+      });
+
+      // Bind to scroll
+      $(window).scroll(function(){
+        // Get container scroll position
+        var fromTop = $(this).scrollTop()+topMenuHeight;
+
+         // Get id of current scroll item
+         var cur = scrollItems.map(function(){
+           if ($(this).offset().top < fromTop)
+             return this;
+         });
+         // Get the id of the current element
+         cur = cur[cur.length-1];
+         var id = cur && cur.length ? cur[0].id : "";
+
+        if (lastId !== id) {
+             lastId = id;
+             // Set/remove active class
+             menuItems
+               .parent().removeClass("active")
+               .end().filter("[href='#"+id+"']").parent().addClass("active");
+        }
+
+        var sidebar = $('.plot-page .content-nav');
+        if (sidebar.offset().top + sidebar.height() >= $('.footer-container').offset().top - 20) {
+          sidebar.css('position', 'absolute');
+        } else if($(document).scrollTop() + window.innerHeight < $('.footer-container').offset().top) {
+          sidebar.css('position', 'fixed'); // restore when you scroll up
+        }
+      });
+    </script>
+  </body>
+</html>

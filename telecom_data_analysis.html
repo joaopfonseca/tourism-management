@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <title>DSSIM - Telecom Data Analysis</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="./css/flexslider.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/line-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/elegant-icons.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/lightbox.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/theme.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="./css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--[if gte IE 9]>
+    <link rel="stylesheet" type="text/css" href="../../../Desktop/website/css/ie9.css"/>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700%7CRaleway:700' rel='stylesheet' type='text/css'>
+    <script src="./js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body class="plot-page">
+  	<div class="loader">
+  		<div class="spinner">
+		  <div class="double-bounce1"></div>
+		  <div class="double-bounce2"></div>
+		</div>
+  	</div>
+
+    <div class="nav-container">
+
+      <nav class="top-bar">
+        <div class="container">
+
+          <div class="row utility-menu">
+            <div class="col-sm-12">
+              <div class="utility-inner clearfix">
+              </div>
+            </div>
+          </div><!--end of row-->
+
+          <div class="row nav-menu">
+  					<div class="col-sm-9 col-md-10 columns">
+  						<ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="airbnb_data_analysis.html">Airbnb Portugal</a></li>
+                <li><a href="lisbon_data_analysis.html">Airbnb Lisbon</a></li>
+                <li><a href="porto_data_analysis.html">Airbnb Porto</a></li>
+                <li><a href="cascais_airbnb_analysis.html">Airbnb Cascais</a></li>
+                <li class="selected"><a href="telecom_data_analysis.html">Telecom</a></li>
+                <li><a href="flows/index.html" target="_blank">Flows</a></li>
+                <!--<li><a href="telecom_data_analysis.html">Telecom</a></li>
+                <li><a href="flows/index.html" target="_blank">Flows</a></li>-->
+              </ul>
+  					</div>
+  				</div><!--end of row-->
+
+          <div class="mobile-toggle">
+            <i class="icon icon_menu"></i>
+          </div>
+
+        </div><!--end of container-->
+      </nav>
+    </div>
+
+
+    <div class="main-container">
+		  <section class="no-pad">
+        <div class="main-content">
+          <div id="introduction">
+            <h1>Telecom Data</h1>
+            <p>
+              The data provided for this analysis consists in a mixture of various protocols and network events, both active and passive, to which we will refer to as Network Events (or simply events). It contains information regarding the mentioned Network Events for individuals connected to NOS’ network with a foreign SIM card for the whole Portuguese territory between August 1st of 2017 and August 30th of the same year, period in which the following exploratory analysis is based.
+            </p>
+            <p>
+              The access to said data was granted by the Portuguese telecom company NOS, being one of the project partners along with Turismo de Portugal.
+            </p>
+
+            <p>
+              Network Events contain:
+              <ol>
+                <li><b>The anonymized user identifier for the customer</b></li>
+                <li><b>The nationality of the user’s SIM Card</b></li>
+                <li><b>The date and time of the event</b></li>
+                <li><b>Coordinates of the Network Tower’s cell associated to the Network Event</b></li>
+              </ol>
+            </p>
+
+
+          </div>
+
+          <div id="daily-presences" class="plot-section">
+            <h3>Daily presences of foreign visitors</h3>
+            <p>
+              The total presences per day for each tourist's country of origin in Portugal during August 2017 that connected to NOS' network. Breaks are done between the highest number of visitors for each country of origin, with the remaining countries listed as 'others'.
+            </p>
+            <embed src="telecom_viz/origins_day.html"  width="100%" height="600"></embed>
+            <p>
+              The total number of tourists in August were counted for each district between August 1st 2017 and August 30th 2017. The shade of blue represents the number of visitors (darker shade = more tourists).
+            </p><br></br>
+
+            <embed src="telecom_viz/tourists_per_district.png"  width="90%" height="90%"></embed>
+
+            <p>
+              For each day, unique visitors for each district were also counted.
+            </p><br></br>
+            <embed src="telecom_viz/tourists_per_day_edit.gif"  width="90%" height="90%"></embed>
+            <p>
+              The distribution of tourists' country of origin is shown below:
+            </p>
+            <embed src="telecom_viz/number_of_tourists_per_origin.html"  width="100%" height="600"></embed>
+
+            <p>
+              Finally, the percentage of arrivals and departures per day of week was calculated.
+            </p>
+            <embed src="telecom_viz/weekday_analysis.html"  width="100%" height="600"></embed>
+          </div>
+
+          <div id="length-of-stay" class="plot-section">
+            <h3>Duration of stay of foreign visitors</h3>
+            <p>
+              The estimates for how many days foreign visitors stay in Portugal during the mentioned period, by nationality.
+            </p>
+            <embed src="telecom_viz/length_of_stay_per_origin.html"  width="100%" height="600"></embed>
+            <p>
+              The number of tourists grouped by days of stay:
+            </p>
+            <embed src="telecom_viz/days_of_stay.html"  width="100%" height="600"></embed>
+            <p>
+              The average length of stay per district is shown as a choropleth map, thus emphasizing the discrepancies across districts.
+            </p><br></br>
+            <embed src="telecom_viz/avg_stay_district.png"  width="90%" height="90%"></embed>
+          </div>
+
+
+
+
+          <div id="understanding-a-tourist-flow" class="plot-section">
+            <h3>Data Story: A tourist's trip in Lisbon</h3>
+            <p>
+              Analyzing tourists’ flows across Portugal will contribute to a better understanding of tourist’s profiles by nationality, namely their length of stay, typical path and favorite attractions, allowing Portuguese policy makers to segment touristic promotion for a more homogeneous distribution.
+            </p>
+            <p>
+              We know from the basic data analysis that the most common tourist visiting Lisbon in the month of August is French.
+            </p>
+            <p>
+              So, we will define our target tourist as French and is visiting Lisbon in August.
+            </p>
+            <p>
+              As 23% of tourists arrive on a Tuesday, and the second day of August 2017 with the maximum number of French tourists is on the 12th (Saturday) and the average length of stay of these tourists is of 8 days, the tourist must be in Lisbon on the 12th and have a length of stay around the mentioned average.
+            </p>
+            <p>
+              We will consider the most common day of week of departure for our tourist: Wednesday, which corresponds to August 16th and a date of arrival August 8th (Tuesday), being also the most common day of arrival.
+            </p>
+
+            <ol>
+              <li><b>Arrival date:</b> 8th</li>
+              <li><b>Departure date:</b> 16th</li>
+              <li><b>First contact was in Lisbon's Airport (implying he arrived by plane)</b></li>
+              <li><b>Visiting Lisbon</b></li>
+            </ol>
+            <p>
+              <b>Day 1:</b> Our tourist Arrived at the Lisbon Airport at 7h05 and stood around Eduardo VII Park:
+            </p>
+            <embed src="telecom_viz/data_story/d1.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 2:</b> The tourist toured around Marquês de Pombal, Eduardo VII Park and Rossio Square:
+            </p>
+            <embed src="telecom_viz/data_story/d2.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 3:</b> The next day the tourist visited the regikons around Rato, Alfama, Fado Museum, Rossio Square, Marquês de Pombal and Eduardo VII Park:
+            </p>
+            <embed src="telecom_viz/data_story/d3.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 4:</b> On this day the tourist traveled visited the regions around Rossio Square, MAAT, Oeiras and Paço de Arcos:
+            </p>
+            <embed src="telecom_viz/data_story/d4.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 5:</b> The tourist then visited Sintra, Guincho, Queluz, Oeiras, went to see the Águas Livres Aqueduct, Eduardo VII Park and finally Luís de Camões square (close to Bairro Alto):
+            </p>
+            <embed src="telecom_viz/data_story/d5.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 6:</b> Toured around Santa Justa Lift, Marquês de Pombal and Rossio Square:
+            </p>
+            <embed src="telecom_viz/data_story/d6.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 7:</b> Visited Cristo Rei, toured around MAAT and National Coach Museum, went to Carcavelos and then back to Eduardo VII Park:
+            </p>
+            <embed src="telecom_viz/data_story/d7.png"  width="100%" height="100%"></embed>
+            <p>
+              <b>Day 8:</b> Our tourist ended his trip and went back to the airport:
+            </p>
+            <embed src="telecom_viz/data_story/d8.png"  width="100%" height="100%"></embed>
+            <p>
+              The complete tourist's trip is available below with its hourly location (according to the Network Events registered on NOS' network):
+            </p>
+            <embed src="telecom_viz/data_story/data_stories_flows.gif"  width="100%" height="100%"></embed>
+
+
+          </div>
+
+          <div id="flows-cruises" class="plot-section">
+            <h3>Tourist flows on cruise days</h3>
+            <p>
+              Days with most tourist arrivals by cruise: 1st of August and 29th of August. Detection of tourists arriving by cruise.
+            </p>
+            <p>
+              Method:
+              <br></br>
+              - Locate tourists arriving close (before and after) to the arrival of the cruise
+              <br></br>
+              - Locate tourists leaving close (before and after) to the departure of the cruise
+              <br></br>
+              - Locate tourists with low length of Stay
+              <br></br>
+              - Tourists that at some point were in Lisbon between the dates of arrival and departure
+              <br></br>
+              - Tourists that didn't leave Libon and/or Setubal district between the dates of arrival and departure
+              <br></br>
+              - Tourists that were not in the interior of Portugal
+            </p>
+
+            <p>
+              Results so far (without cruise tourist detection):
+            </p><br></br>
+            <embed src="telecom_viz/cruises_flows/7am.png"  width="100%" height="100%"></embed>
+            <br></br>
+            <embed src="telecom_viz/cruises_flows/11am.png"  width="100%" height="100%"></embed>
+            <br></br>
+            <embed src="telecom_viz/cruises_flows/3pm.png"  width="100%" height="100%"></embed>
+            <br></br>
+            <embed src="telecom_viz/cruises_flows/7pm.png"  width="100%" height="100%"></embed>
+            <br></br>
+            <embed src="telecom_viz/cruises_flows/11pm.png"  width="100%" height="100%"></embed>
+
+            <!--
+            <p>
+              /-/-/-/-/-/-/-/
+            </p>
+            <embed src=""  width="100%" height="600"></embed>
+          -->
+          </div>
+
+
+
+
+
+
+        </div>
+		</section>
+	</div>
+
+  <div class="content-nav">
+    <ul class="nav nav-tabs nav-stacked primary">
+      <li class="tab"><a href="#introduction">Introduction</a></li>
+      <li class="tab"><a href="#daily-presences">Daily presences of foreign visitors</a></li>
+      <li class="tab"><a href="#length-of-stay">Duration of stay of foreign visitors</a></li>
+      <li class="tab"><a href="#understanding-a-tourist-flow">Data Story: A tourist's trip in Lisbon</a></li>
+      <li class="tab"><a href="#flows-cruises">Tourist flows on cruise days</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-container">
+    <footer class="bg-primary short-2">
+      <div class="container">
+        <div class="right-footer">
+          <h6>Data Science for Social Impact and Management</h6>
+          <div class="footer-nav">
+            <a href="">Report</a>
+            <a href="http://dssim.dssg-eu.org/">DSSIM</a>
+            <a href="https://github.com/DSSG2017/">Github</a>
+          </div>
+          <div class="disclaimer">All analyses and opinions contained here are the author’s own, and are not necessarily held or endorsed by any of the partners or data-providing agencies.</div>
+        </div>
+        <div class="left-footer">
+          <h5>Acknowledgements</h5>
+          <div class="small-text-block">
+              Nova School of Business and Economics
+             |
+              Nova Information Management School
+             |
+              Turismo de Portugal
+             |
+              NOS SGPS
+
+            </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="cdrPlots.js"></script>
+    <script>
+      totalPresences();
+      foreignPresences();
+      italianPresences();
+      foreignNumberOfTrips();
+      italianNumberOfTrips();
+      foreignLengthStay();
+      italianLengthStay();
+    </script>
+	<script src="./js/jquery.min.js"></script>
+  <script src="./js/jquery.plugin.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/jquery.flexslider-min.js"></script>
+  <script src="./js/smooth-scroll.min.js"></script>
+  <script src="./js/skrollr.min.js"></script>
+  <script src="./js/spectragram.min.js"></script>
+  <script src="./js/scrollReveal.min.js"></script>
+  <script src="./js/isotope.min.js"></script>
+  <script src="./js/twitterFetcher_v10_min.js"></script>
+  <script src="./js/lightbox.min.js"></script>
+  <script src="./js/jquery.countdown.min.js"></script>
+  <script src="./js/scripts.js"></script>
+  <script>
+    // Cache selectors
+    var lastId,
+    topMenu = $(".content-nav"),
+    topMenuHeight = 0,
+    // All list items
+    menuItems = topMenu.find("a"),
+    // Anchors corresponding to menu items
+    scrollItems = menuItems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
+    });
+
+    // Bind click handler to menu items
+    // so we can get a fancy scroll animation
+    menuItems.click(function(e){
+      var href = $(this).attr("href"),
+          offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+      $('html, body').stop().animate({
+          scrollTop: offsetTop
+      }, 300);
+      e.preventDefault();
+    });
+
+    // Bind to scroll
+    $(window).scroll(function() {
+      // Get container scroll position
+      var fromTop = $(this).scrollTop()+topMenuHeight;
+
+      // Get id of current scroll item
+      var cur = scrollItems.map(function(){
+      if ($(this).offset().top < fromTop)
+       return this;
+      });
+      // Get the id of the current element
+      cur = cur[cur.length-1];
+      var id = cur && cur.length ? cur[0].id : "";
+
+      if (lastId !== id) {
+        lastId = id;
+        // Set/remove active class
+        menuItems
+          .parent().removeClass("active")
+          .end().filter("[href='#"+id+"']").parent().addClass("active");
+      }
+
+      var sidebar = $('.plot-page .content-nav');
+      if (sidebar.offset().top + sidebar.height() >= $('.footer-container').offset().top - 20) {
+        sidebar.css('position', 'absolute');
+      } else if($(document).scrollTop() + window.innerHeight < $('.footer-container').offset().top) {
+        sidebar.css('position', 'fixed'); // restore when you scroll up
+      }
+    });
+    </script>
+  </body>
+</html>
